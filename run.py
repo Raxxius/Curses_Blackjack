@@ -4,6 +4,12 @@
 import random
 # from art import card
 
+def mixs(num):
+    try:
+        ele = int(num)
+        return (0, ele, '')
+    except ValueError:
+        return (1, num, '')
 
 def deck():
     # Creates the deck of cards based on 4 packs of cards 
@@ -18,10 +24,38 @@ def deck():
     random.shuffle(deck)
     return deck
 
+def card_sum(player_cards):
+    player_total = 0
+    print(player_total)
+    print(player_cards)
+    player_cards.sort(key = mixs)
+    print(player_cards)
+    for card in player_cards:
+        print(card)
+        if card == "Ace":
+            if player_total + 11 < 22:
+                player_total += 11
+                print(player_total)
+            else: player_total += 1
+            print(player_total)
+        elif card in ["Jack", "King", "Queen"]:
+            player_total += 10
+            print(player_total)
+        else:
+            print(card)
+            player_total += card
+            print(player_total)
+    print(f"Player total score = {player_total}")
+
+
 def draw(deck):
-    card_number = 0
+
     player_turn_end = False
-    while player_turn_end != True:
+    player_cards = []
+    player_cards.append(deck.pop(len(deck)-1))
+    card_number = len(player_cards)
+    player_total = card_sum(player_cards)
+    while player_turn_end is not True:
         if card_number == 5:
             player_turn_end == True
         else:
@@ -30,6 +64,5 @@ def draw(deck):
             card_number += 1
             player_turn_end == True
 
-deck = deck()
-print("Deck is shuffled")
-draw(deck)
+player_cards = ["Queen", 3, "Jack", "Jack"]
+card_sum(player_cards)
