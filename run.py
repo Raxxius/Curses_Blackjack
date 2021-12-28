@@ -30,9 +30,13 @@ def card_sum(player_cards):
     # Sorts so that Aces are counted last to allow for
     # The two potential values of the Ace.
     player_total = 0
+    
     player_cards.sort(key = mixs, reverse = True)
+    card_values = []
     for card in player_cards:
-        print(card)
+        card_number = card.split()
+        card_values.append(card_number[1])
+    for card in card_values:
         if card == "Ace":
             if player_total + 11 < 22:
                 player_total += 11
@@ -40,31 +44,28 @@ def card_sum(player_cards):
         elif card in ["Jack", "King", "Queen"]:
             player_total += 10
         else:
-            print(card)
-            player_total += card
+            player_total += int(card)
     return player_total
 
 
 def draw(deck):
+    # Draws a card from the deck and returns it and the new deck
     player_card = deck.pop(len(deck)-1)
     return player_card, deck
 
-"""    player_turn_end = False
+def game(deck):
+    # Main game logic, draw up to 5 cards for the player,
+    # Asks the player if they stick or hit
+    # Player looses if they score over 21
     player_cards = []
-    player_cards.append(deck.pop(len(deck)-1))
-    card_number = len(player_cards)
-    player_total = card_sum(player_cards)
-    while player_turn_end is not True:
-        if card_number == 5:
-            player_turn_end == True
-        else:
-            player_card_1 = deck.pop(len(deck)-1)
-            print(player_card_1)
-            card_number += 1
-            player_turn_end == True"""
-    
+    player_card_1, deck = draw(deck)
+    player_card_2, deck = draw(deck)
+    player_cards.append(player_card_1)
+    player_cards.append(player_card_2)
+    points = card_sum(player_cards)
+    print(f"Your starting cards are {player_card_1}, and {player_card_2}")
+    print(f"Your score is {points}")
+
 
 deck = deck()
-player_card, deck = draw(deck)
-print(player_card)
-print(deck)
+game(deck)
