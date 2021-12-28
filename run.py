@@ -7,9 +7,9 @@ import random
 def mixs(num):
     try:
         ele = int(num)
-        return (0, ele, '')
+        return (1, ele, '')
     except ValueError:
-        return (1, num, '')
+        return (0, num, '')
 
 def deck():
     # Creates the deck of cards based on 4 packs of cards 
@@ -28,7 +28,7 @@ def card_sum(player_cards):
     player_total = 0
     print(player_total)
     print(player_cards)
-    player_cards.sort(key = mixs)
+    player_cards.sort(key = mixs, reverse = True)
     print(player_cards)
     for card in player_cards:
         print(card)
@@ -64,5 +64,5 @@ def draw(deck):
             card_number += 1
             player_turn_end == True
 
-player_cards = ["Queen", 3, "Jack", "Jack"]
+player_cards = ["Queen", 3, "Ace", 7]
 card_sum(player_cards)
